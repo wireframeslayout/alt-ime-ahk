@@ -6,6 +6,7 @@
 ;
 ; Author:     karakaram   http://www.karakaram.com/alt-ime-on-off
 
+
 #UseHook
 #SingleInstance, force
 
@@ -16,6 +17,10 @@ SendMode Input
 
 ; Razer Synapseなど、キーカスタマイズ系のツールを併用しているときのエラー対策
 #MaxHotkeysPerInterval 350
+
+;; たまにctrlが押しっぱなしになってしまうので A + S同時押しで Ctrl Upを発生させて元に戻るように調整
+A & S::send {Ctrl Up}
+
 
 ; 主要なキーを HotKey に設定し、何もせずパススルーする
 *~a::
@@ -137,9 +142,21 @@ SendMode Input
 ; Windowsキーに対してIME切り替えを割り当て
 LWin::IME_SET(0)
 
+
+; 変換でIME切り替え
+vk1D::IME_SET(0)
+
 ; Windowsキーに対してIME切り替えを割り当て
 RWin::IME_SET(1)
 vkF2::IME_SET(1)
+
+; 無変換でIME切り替え
+vk1C::IME_SET(1)
+
+; CapsLockをCtrlにする
+; CapsLockが押しっぱなしになる事象が発生。autohotkeyだけでは対応できないので今回は設定しない
+;Capslock::Ctrl
+;sc03a::Ctrl
 
 ; ; winをaltにする
 LAlt::Alt
@@ -263,7 +280,12 @@ LWin & Left::
   }
 Return
 
+
+
 LWin & Space::
-    send {Blind}{LWin}
-    send {Blind}{LWin up}
-return
+    send {Blind}{LWin Down}
+    send {Blind}{LWin Up}
+Return
+
+
+
