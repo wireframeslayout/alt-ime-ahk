@@ -7,6 +7,7 @@
 ; Author:     karakaram   http://www.karakaram.com/alt-ime-on-off
 
 
+#Include %A_ScriptDir% 
 #UseHook
 #SingleInstance, force
 
@@ -17,10 +18,6 @@ SendMode Input
 
 ; Razer Synapseなど、キーカスタマイズ系のツールを併用しているときのエラー対策
 #MaxHotkeysPerInterval 350
-
-;; たまにctrlが押しっぱなしになってしまうので A + S同時押しで Ctrl Upを発生させて元に戻るように調整
-A & S::send {Ctrl Up}
-
 
 ; 主要なキーを HotKey に設定し、何もせずパススルーする
 *~a::
@@ -287,5 +284,22 @@ LWin & Space::
     send {Blind}{LWin Up}
 Return
 
+; アプリケーションを終了する
+F13::ExitApp
 
+; Adobe用 Loupdeckでの操作
+
+; ctrl + Space - Zoomツールへの一時的な持ち替え
+F24::
+;send ^{Space}
+Send {LCtrl Down} {Space Down}
+Return
+
+F24 Up::
+Send {LCtrl Up} {Space Up}
+Return
+
+;; たまにctrlが押しっぱなしになってしまうので Q + P同時押しで Ctrl Upを発生させて元に戻るように調整
+Q & P::send {Ctrl Up}
+F14::send {Ctrl Up}
 
